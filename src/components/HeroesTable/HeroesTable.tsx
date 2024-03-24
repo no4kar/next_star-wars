@@ -1,31 +1,38 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from '../Pagination/Pagination'
-import { StarWarsHero } from '@/types/StarWars/StartWars.type';
+import { StarWarsHero, StarWarsData } from '@/types/StarWars/StarWars.type';
+import * as starWarsApi from '@/api/starWars.api';
+import HeroFlowInfo from '../HeroFlowInfo/HeroFlowInfo';
 
-const UsersTable = ({
-  users,
-}: {
-  users: StarWarsHero[],
-}) => {
+const HeroesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  
-  const perPage = 5;
-  const itemNumberStart = perPage * (currentPage - 1);
-  const itemNumberEnd = Math.min(perPage * currentPage, users.length);
+  const [currentHeroesPage, setCurrentHeroesPage] = useState<StarWarsData<StarWarsHero[]> | null>(null)
+
+  const perPage = 10;
+
+  useEffect(() => {
+    starWarsApi.getPeopleByPage(currentPage)
+      .then(setCurrentHeroesPage)
+      .catch(() => setCurrentHeroesPage(null));
+  },
+    [currentPage]);
+
+  if (!currentHeroesPage) return null;
 
   console.info(`
-  total=${users.length}
   currentPage=${currentPage}
+  currentHeroesPage.results[0]=${JSON.stringify(currentHeroesPage.results[0])}
   `);
+
 
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <Pagination
-            total={users.length}
+            total={currentHeroesPage.count}
             perPage={perPage}
             currentPage={currentPage}
             onPageChange={(v) => setCurrentPage(v)}
@@ -46,12 +53,18 @@ const UsersTable = ({
               </thead>
 
               <tbody>
-                {(users.slice(itemNumberStart, itemNumberEnd)).map(user => (
-                  <tr key={user.created}
+                <tr className="border-b border-neutral-200 dark:border-white/10">
+                  <td colSpan={3} className="h-64">
+                    <HeroFlowInfo hero={currentHeroesPage.results[0]} />
+                  </td>
+                </tr>
+
+                {(currentHeroesPage.results).map(hero => (
+                  <tr key={hero.created}
                     className="border-b border-neutral-200 dark:border-white/10">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">{user.birth_year}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{user.homeworld}</td>
+                    <td className="whitespace-nowrap px-6 py-4 font-medium">{hero.birth_year}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{hero.name}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{hero.homeworld}</td>
                   </tr>
                 ))}
               </tbody>
@@ -59,8 +72,10 @@ const UsersTable = ({
           </div>
         </div>
       </div>
+
+
     </div>
   )
 }
 
-export default React.memo(UsersTable);
+export default React.memo(HeroesTable);

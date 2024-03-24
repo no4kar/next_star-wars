@@ -74,4 +74,8 @@ const Pagination = ({
   )
 }
 
-export default React.memo(Pagination);
+export default React.memo(Pagination, (prevProps, nextProps) => {
+  return prevProps.total === nextProps.total
+    && prevProps.currentPage === nextProps.currentPage
+    && prevProps.perPage === nextProps.perPage;
+});
