@@ -8,6 +8,7 @@ import HeroFlowInfo from '../HeroFlowInfo/HeroFlowInfo';
 
 const HeroesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentHero, setCurrentHero] = useState<StarWarsHero | null>(null);
   const [currentHeroesPage, setCurrentHeroesPage] = useState<StarWarsData<StarWarsHero[]> | null>(null)
 
   const perPage = 10;
@@ -20,12 +21,6 @@ const HeroesTable = () => {
     [currentPage]);
 
   if (!currentHeroesPage) return null;
-
-  console.info(`
-  currentPage=${currentPage}
-  currentHeroesPage.results[0]=${JSON.stringify(currentHeroesPage.results[0])}
-  `);
-
 
   return (
     <div className="flex flex-col">
@@ -53,19 +48,28 @@ const HeroesTable = () => {
               </thead>
 
               <tbody>
-                <tr className="border-b border-neutral-200 dark:border-white/10">
-                  <td colSpan={3} className="h-64">
-                    <HeroFlowInfo hero={currentHeroesPage.results[0]} />
-                  </td>
-                </tr>
-
                 {(currentHeroesPage.results).map(hero => (
-                  <tr key={hero.created}
-                    className="border-b border-neutral-200 dark:border-white/10">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">{hero.birth_year}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{hero.name}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{hero.homeworld}</td>
-                  </tr>
+                  hero.name !== currentHero?.name
+                    ? (
+                      <tr
+                        key={hero.created}
+                        className="cursor-pointer border-b border-neutral-200 dark:border-white/10"
+                        onClick={() => setCurrentHero(hero)}
+                      >
+                        <td className="whitespace-nowrap px-6 py-4 font-medium">{hero.birth_year}</td>
+                        <td className="whitespace-nowrap px-6 py-4">{hero.name}</td>
+                        <td className="whitespace-nowrap px-6 py-4">{hero.homeworld}</td>
+                      </tr>
+                    )
+                    : (
+                      <tr
+                        key={hero.created}
+                        className="border-b border-neutral-200 dark:border-white/10">
+                        <td colSpan={3} className="h-64">
+                          <HeroFlowInfo hero={currentHero} />
+                        </td>
+                      </tr>
+                    )
                 ))}
               </tbody>
             </table>

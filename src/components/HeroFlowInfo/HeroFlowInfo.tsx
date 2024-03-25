@@ -1,5 +1,5 @@
-import { getFilmById, getFilmsById, getStarshipById, getStarshipsById } from '@/api/starWars.api';
-import { StarWarsFilm, StarWarsFilmWithId, StarWarsHero, StarWarsStarship, StarWarsStarshipWithId } from '@/types/StarWars/StarWars.type';
+import { getFilmById, getStarshipById } from '@/api/starWars.api';
+import { StarWarsFilmWithId, StarWarsHero, StarWarsStarshipWithId } from '@/types/StarWars/StarWars.type';
 import React, { useCallback, useEffect } from 'react';
 import ReactFlow, {
   addEdge,
@@ -12,7 +12,6 @@ import ReactFlow, {
 
 import 'reactflow/dist/style.css';
 
-const onInit = (reactFlowInstance: any) => console.info('flow loaded:', reactFlowInstance);
 const styles = {
   hero: {
     background: '#fdba74',
@@ -31,39 +30,29 @@ const styles = {
   },
 };
 
+const helperNode: Node = {
+  id: 'helper',
+  type: 'default',
+  style: { width: 'fit-content', border: 'none', },
+  data: {
+    label: (
+      <div className='flex flex-col w-min'>
+        <strong style={{ color: styles.hero.background }}>Hero</strong>
+        <strong style={{ color: styles.movie.background }}>Movie</strong>
+        <strong style={{ color: styles.starship.background }}>Starship</strong>
+      </div>
+    ),
+  },
+  draggable: false,
+  selectable: false,
+  position: { x: 0, y: 0 },
+};
+
 const HeroFlowInfo = ({
   hero,
 }: {
   hero: StarWarsHero,
 }) => {
-  const helperNode: Node = {
-    id: 'helper',
-    type: 'default',
-    style: { width: 'fit-content', border: 'none', },
-    data: {
-      label: (
-        <div className='flex flex-col w-min'>
-          <strong style={{ color: styles.hero.background }}>Hero</strong>
-          <strong style={{ color: styles.movie.background }}>Movie</strong>
-          <strong style={{ color: styles.starship.background }}>Starship</strong>
-        </div>
-      ),
-    },
-    draggable: false,
-    selectable: false,
-    position: { x: 0, y: 0 },
-  };
-
-  // const initialEdges: Edge[] = [
-  // { id: 'e-hero-movie1', source: 'hero', target: 'movie1' },
-  // { id: 'e-hero-movie2', source: 'hero', target: 'movie2' },
-  // { id: 'e-hero-movie3', source: 'hero', target: 'movie3' },
-  // { id: 'e-movie1-starship5', source: 'movie1', target: 'starship5' },
-  // { id: 'e-movie2-starship5', source: 'movie2', target: 'starship5' },
-  // { id: 'e-movie1-starship15', source: 'movie1', target: 'starship15' },
-  // { id: 'e-movie3-starship15', source: 'movie3', target: 'starship15' },
-  // ];
-
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
@@ -126,9 +115,9 @@ const HeroFlowInfo = ({
           })));
       }
 
-      console.info(films);
-      console.info(starships);
-      console.info(filmEdges);
+      // console.info(films);
+      // console.info(starships);
+      // console.info(filmEdges);
 
       setNodes([
         helperNode,
@@ -158,7 +147,7 @@ const HeroFlowInfo = ({
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onInit={onInit}
+      // onInit={onInit}
       fitView
     >
     </ReactFlow>

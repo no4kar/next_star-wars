@@ -1,8 +1,6 @@
 import React from 'react';
 import * as lodash from 'lodash';
 
-import { getNumbers } from '@/utils/common';
-
 const Pagination = ({
   total,
   perPage,

@@ -17,18 +17,8 @@ export function getFilmById<T = StarWarsFilm>(id: number)
     .then(res => res.data as T);
 }
 
-export function getFilmsById(ids: number[])
-  : Promise<StarWarsFilm[]> {
-  return Promise.all(ids.map(id => getFilmById(id)));
-}
-
 export function getStarshipById<T = StarWarsStarship>(id: number)
   : Promise<T> {
   return starWarsAxiosClient.get(`starships/${id}/`)
     .then(res => res.data as T);
-}
-
-export function getStarshipsById(ids: number[])
-  : Promise<StarWarsStarship[]> {
-    return Promise.all(ids.map(id => getStarshipById(id)));
 }
