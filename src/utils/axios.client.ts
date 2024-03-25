@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-//client methods return Promise<AxiosResponse<T, any>>. You will need .then(res => res.data)
 export function getAxiosClient(BASE_URL: string) {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: BASE_URL
