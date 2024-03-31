@@ -1,14 +1,27 @@
-export type StarWarsData<T> = {
+declare namespace StarWarsTy {
+  export {
+    Data,
+    Hero,
+    StarShip,
+    StarShipWithId,
+    Film,
+    FilmWithId,
+  };
+}
+
+export type { StarWarsTy };
+
+type Data<T> = {
   count: number,
   next: string | null,
   previous: string | null,
   results: T,
 };
 
-export type StarWarsHero = {
+type Hero = {
   name: string,
-  height: number,
-  mass: number,
+  height: string,
+  mass: string,
   hair_color: string,
   skin_color: string,
   eye_color: string,
@@ -24,7 +37,7 @@ export type StarWarsHero = {
   url: string
 };
 
-export type StarWarsFilm = {
+type Film = {
   title: string,
   episode_id: number,
   opening_crawl: string,
@@ -41,7 +54,11 @@ export type StarWarsFilm = {
   url: string,
 };
 
-export type StarWarsStarship = {
+interface FilmWithId extends Film {
+  id: number;
+}
+
+type StarShip = {
   name: string,
   model: string,
   manufacturer: string,
@@ -62,10 +79,6 @@ export type StarWarsStarship = {
   url: string,
 };
 
-export interface StarWarsFilmWithId extends StarWarsFilm {
-  id: number;
-}
-
-export interface StarWarsStarshipWithId extends StarWarsStarship {
+interface StarShipWithId extends StarShip {
   id: number;
 }

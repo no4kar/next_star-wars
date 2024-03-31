@@ -1,34 +1,26 @@
+'use client';
+
 import React from 'react';
 import * as lodash from 'lodash';
 
 const Pagination = ({
-  total,
-  perPage,
+  pagesCount,
   currentPage = 1,
   onPageChange = () => { },
 }: {
-  total: number,
-  perPage: number,
+  pagesCount: number,
   currentPage?: number,
   onPageChange: (page: number) => void,
 }) => {
-  const pagesCount = Math.ceil(total / perPage); // 100/10
-
-  if (pagesCount === 1) return null;
   const pageNumbers = lodash.range(1, pagesCount + 1);
   const isFirstPage = currentPage === pageNumbers[0];
   const isLastPage = currentPage === pageNumbers[pageNumbers.length - 1];
 
-  console.info(`
-  pageNumbers=${JSON.stringify(pageNumbers)}
-  isFirstPage=${isFirstPage}
-  isLastPage=${isLastPage}
-  `);
-
   return (
-    <ul className="list-style-none flex">
+    <ul data-testid="StarWarsPagination" className="list-style-none flex">
       <li>
-        <a
+        <button
+          data-testid="PreviousBtn"
           aria-disabled={isFirstPage}
           className={
             !isFirstPage
@@ -38,12 +30,12 @@ const Pagination = ({
           onClick={() => isFirstPage || onPageChange(currentPage - 1)}
         >
           Previous
-        </a>
+        </button>
       </li>
 
       {pageNumbers.map(pageNumber => (
         <li key={pageNumber}>
-          <a
+          <button
             className={
               pageNumber === currentPage
                 ? "cursor-pointer relative block rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-primary-700 transition duration-300 focus:outline-none dark:bg-slate-900 dark:text-primary-500"
@@ -51,12 +43,13 @@ const Pagination = ({
             }
             onClick={() => onPageChange(pageNumber)}
           >{pageNumber}
-          </a>
+          </button>
         </li>
       ))}
 
       <li>
-        <a
+        <button
+          data-testid="NextBtn"
           aria-disabled={isLastPage}
           className={
             !isLastPage
@@ -66,14 +59,13 @@ const Pagination = ({
           onClick={() => isLastPage || onPageChange(currentPage + 1)}
         >
           Next
-        </a>
+        </button>
       </li>
     </ul>
   )
 }
 
 export default React.memo(Pagination, (prevProps, nextProps) => {
-  return prevProps.total === nextProps.total
+  return prevProps.pagesCount === nextProps.pagesCount
     && prevProps.currentPage === nextProps.currentPage
-    && prevProps.perPage === nextProps.perPage;
 });

@@ -1,0 +1,68 @@
+{
+  "count": 2,
+  "next": "https://sw-api.starnavi.io/people/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "name": "Obi-Wan Kenobi",
+      "height": "182",
+      "mass": "77",
+      "hair_color": "auburn, white",
+      "skin_color": "fair",
+      "eye_color": "blue-gray",
+      "birth_year": "57BBY",
+      "gender": "male",
+      "homeworld": 20,
+      "films": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "species": [
+        1
+      ],
+      "vehicles": [
+        38
+      ],
+      "starships": [
+        48,
+        59,
+        64,
+        65,
+        74
+      ],
+      "created": "2014-12-10T16:16:29.192000Z",
+      "edited": "2014-12-20T21:17:50.325000Z",
+      "url": "https://sw-api.starnavi.io/people/10/"
+    },
+    {
+      "name": "Yoda",
+      "height": "66",
+      "mass": "17",
+      "hair_color": "white",
+      "skin_color": "green",
+      "eye_color": "brown",
+      "birth_year": "896BBY",
+      "gender": "male",
+      "homeworld": 28,
+      "films": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "species": [
+        6
+      ],
+      "vehicles": [],
+      "starships": [],
+      "created": "2014-12-15T12:26:01.042000Z",
+      "edited": "2014-12-20T21:17:50.345000Z",
+      "url": "https://sw-api.starnavi.io/people/20/"
+    }
+  ]
+}
