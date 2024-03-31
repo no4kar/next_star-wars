@@ -14,7 +14,7 @@ This project represents a table of Star Wars heroes. Upon selecting a hero, you 
 - Upon loading the application, you will see a table listing various Star Wars heroes.
 - Click on a hero to view their connections.
 - The connections will be displayed graphically, illustrating the hero's appearances in movies and the starships they piloted.
-- Working demo is [here](https://next-star-wars-xi.vercel.app/)
+- Working demo is [here](https://next-star-wars-lake.vercel.app/)
 
 ## Contributing
 
