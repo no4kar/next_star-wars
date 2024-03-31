@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Star Wars Heroes Table and Graphs
 
-## Getting Started
+This project represents a table of Star Wars heroes. Upon selecting a hero, you can view graphs illustrating the connections between the hero, the movies they appeared in, and the starships they piloted. The project is built using Next.js and integrates features like fetching data using Axios, rendering graphs with React Flow, and unit testing with Jest.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- View a table of Star Wars heroes
+- Select a hero to visualize their connections
+- Graphical representation of hero-movie-starship connections
+- Unit tests to ensure the functionality of components
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Upon loading the application, you will see a table listing various Star Wars heroes.
+- Click on a hero to view their connections.
+- The connections will be displayed graphically, illustrating the hero's appearances in movies and the starships they piloted.
+- Working demo is [here](https://next-star-wars-xi.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributing
 
-## Learn More
+Contributions to this project are welcome! If you find any issues or have suggestions for enhancements, please feel free to open an issue or submit a pull request. Here are some ways you can contribute:
 
-To learn more about Next.js, take a look at the following resources:
+## Report bugs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Suggest new features or enhancements
+- Write unit tests
+- Improve documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License

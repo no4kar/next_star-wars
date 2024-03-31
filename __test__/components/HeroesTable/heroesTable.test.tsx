@@ -42,7 +42,7 @@ describe('HeroesTable component', () => {
       />
     );
 
-    for (const {birth_year, name, homeworld} of currentHeroesPageMock.results) {
+    for (const { birth_year, name, homeworld } of currentHeroesPageMock.results) {
       expect(getByText(birth_year)).toBeInTheDocument();
       expect(getByText(name)).toBeInTheDocument();
       expect(getByText(String(homeworld))).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('HeroesTable component', () => {
   });
 
   test('renders HeroInfo component when hero row is selected', () => {
-    const { getByTestId, queryByText } = render(
+    const { getByTestId, getByText, getAllByText } = render(
       <HeroesTable
         selectedHero={selectedHeroMock}
         currentHeroesPage={currentHeroesPageMock}
@@ -75,8 +75,8 @@ describe('HeroesTable component', () => {
 
     const { birth_year, name, homeworld } = selectedHeroMock;
 
-    expect(queryByText(birth_year)).not.toBeInTheDocument();
-    expect(queryByText(name)).toBeInTheDocument();// Node with hero's name will be rendered immediately
-    expect(queryByText(String(homeworld))).not.toBeInTheDocument();
+    expect(getByText(birth_year)).toBeInTheDocument();
+    expect(getAllByText(name)).toHaveLength(2);
+    expect(getByText(String(homeworld))).toBeInTheDocument();
   });
 });

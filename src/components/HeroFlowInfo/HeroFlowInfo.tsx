@@ -85,7 +85,7 @@ const HeroFlowInfo = ({
 
     /* Creating edges from film to starships.
   We need to do a bit of work here, because one starship may appear in different films,
-  and in a single film, a hero may use different starships*/
+  and in a single film a hero may use different starships*/
     const filmEdges: Edge[] = [];
 
     for (const film of films) {
@@ -115,11 +115,6 @@ const HeroFlowInfo = ({
       ...filmEdges,
     ]);
   }, [name, films, starships]);
-
-  
-  console.info(name);
-  console.info(films);
-  console.info(starships);
 
   return (
     <ReactFlow
