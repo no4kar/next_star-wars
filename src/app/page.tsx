@@ -9,14 +9,15 @@ import Pagination from '@/components/Pagination/Pagination';
 import HeroesTable from '@/components/HeroesTable/HeroesTable';
 import Loader from '@/components/Loader/Loader';
 
-
-export default function Home() {
-  const emptyHeroesPage: StarWarsTy.Data<StarWarsTy.Hero[]> = {
+const emptyHeroesPage: StarWarsTy.Data<StarWarsTy.Hero[]>
+  = Object.freeze({
     count: 0,
     next: null,
     previous: null,
     results: [],
-  };
+  });
+
+export default function Home() {
   const [isloading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedHero, setSelectedHero] = useState<StarWarsTy.Hero | null>(null);
@@ -45,39 +46,35 @@ export default function Home() {
           </h1>
         </div>
 
-        {isloading
-          ? (
-            <Loader />
-          )
-          : (
-            <>
-              {pagesCount > 0 && (
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                    <Pagination
-                      pagesCount={pagesCount}
-                      currentPage={currentPage}
-                      onPageChange={(page) => setCurrentPage(page)}
-                    />
-                  </div>
-                </div>
-              )}
+        {pagesCount > 0 && (
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <Pagination
+                pagesCount={pagesCount}
+                currentPage={currentPage}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            </div>
+          </div>
+        )}
 
-              {currentHeroesPage.results.length !== 0 && (
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                    <div className="overflow-hidden">
-                      <HeroesTable
-                        selectedHero={selectedHero}
-                        currentHeroesPage={currentHeroesPage}
-                        onSelectHero={(hero) => setSelectedHero(hero)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+        {isloading && (
+          <Loader />
+        )}
+
+        {!isloading && currentHeroesPage.results.length !== 0 && (
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div className="overflow-hidden">
+                <HeroesTable
+                  selectedHero={selectedHero}
+                  currentHeroesPage={currentHeroesPage}
+                  onSelectHero={(hero) => setSelectedHero(hero)}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </main >
   );
